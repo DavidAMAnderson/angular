@@ -1,21 +1,35 @@
-it('can add a ToDo', function() {
-  browser.get('/');
-  // sendKeys tells protractor to enter the string "NewToDo" into the input
-  $('#new-todo-name').sendKeys("NewToDo");
-  $('#add-todo').click();
+describe('Todos tracker', function() {
+  it('has several ToDos', function() {
+    browser.get('/');
+    var todos = $$('#todos p');
+    expect(todos.first().getText()).toMatch('ToDo1: completed Complete');
+    expect(todos.last().getText()).toMatch('ToDo2: not completed Complete');
+  });
 
-  var todo = $$('#todos p').last().getText();
-  expect(todo).toEqual('NewToDo: not completed');
-});
+  it('can add a ToDo', function() {
+    browser.get('/');
+    $('#new-todo-name').sendKeys("NewTodo");
+    $('#add-todo').click();
 
-it('can remove a ToDo', function() {
-  browser.get('/');
-  var todos = $$('#todos p');
+    var todo = $$('#todos p').last().getText();
+    expect(todo).toMatch('NewTodo: not completed');
+  });
 
-  $('#remove-todo').click();
+  it('can remove a ToDo', function() {
+    browser.get('/');
+    var todos = $$('#todos p');
+    var initialCount = todos.count();
 
-  // This has a magic number, how could this magic number be avoided?
-  // The solution is actually surprisingly complex so we've kept in the magic
-  // number for simplicity's sake
-  expect(todos.count()).toEqual(1);
+    $('#remove-todo').click();
+
+    expect(todos.count()).toEqual(1);
+  });
+
+  it('can mark a ToDo as complete', function(){
+    browser.get('/');
+    var todo = $$('#todos p').last();
+    todo.element(by.css('.complete')).click();
+
+    expect(todo.getText()).toMatch("ToDo2: completed");
+  });
 });
