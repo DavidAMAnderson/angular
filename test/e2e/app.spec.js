@@ -1,6 +1,9 @@
-describe("app", function() {
-  it("should say 'Hello world' on the page", function() {
+// in toDosFeature.js
+describe('Todos tracker', function() {
+  it('has several ToDos', function() {
     browser.get('/');
-    expect($$("p").first().getText()).toEqual("Hello world");
+    var todos = $$('#todos p');
+    expect(todos.first().getText()).toEqual('ToDo1: completed');
+    expect(todos.last().getText()).toEqual('ToDo2: not completed');
   });
 });
