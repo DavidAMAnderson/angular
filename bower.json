@@ -1,0 +1,20 @@
+{
+  "name": "angular",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "david anderson <d.a.m.anderson@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/DavidAMAnderson/angular",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.9"
+  }
+}
